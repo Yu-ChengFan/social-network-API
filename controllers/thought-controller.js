@@ -1,7 +1,7 @@
 const { User, Thought } = require('../models');
 
 const thoughtController = {
-    getAllThougths(req, res) {
+    getAllThoughts(req, res) {
         Thought.find({})
         .then(dbthought => res.json(dbthought))
         .catch(err => {
@@ -23,11 +23,11 @@ const thoughtController = {
 
     createThought({ body }, res) {
         Thought.create(body)
-        .then(({_id}) => {
-            return User.findOneAndUpdate({ _id: body.userId }, { $push: { thoughts: _id }}, { new: true });
-        })
-        .then(data => res.json(data))
-        .catch(err => res.status(500).json(err));
+            .then(({ _id }) => {
+                return User.findOneAndUpdate({ _id: body.userId }, { $push: { thoughts: _id }}, {new: true});
+            })
+            .then(data => res.json(data))
+            .catch(err => res.status(500).json(err));
     },
 
     updateThought({ params, body }, res) {

@@ -14,10 +14,10 @@ const userSchema = new Schema ({
         match:[/^([\w]+@([\w-]+\.)+[\w-]{2,4})?$/, 'Invalid input']
     },
     thoughts: [{
-        type: Schema.Types.ObjectId, ref: 'thought'
+        type: Schema.Types.ObjectId, ref: 'Thought'
     }],
     friends: [{
-        type: Schema.Types.ObjectId, ref: 'user'
+        type: Schema.Types.ObjectId, ref: 'User'
     }]
 },
 {
