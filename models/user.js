@@ -14,10 +14,10 @@ const userSchema = new Schema ({
         match:[/^([\w]+@([\w-]+\.)+[\w-]{2,4})?$/, 'Invalid input']
     },
     thoughts: [{
-        type: Schema.type.ObjectId, ref: 'thought'
+        type: Schema.Types.ObjectId, ref: 'thought'
     }],
     friends: [{
-        type: Schema.type.ObjectId, ref: 'user'
+        type: Schema.Types.ObjectId, ref: 'user'
     }]
 },
 {
@@ -31,5 +31,5 @@ userSchema.virtual('friendCount').get(function(){
     return this.friends.length;
 });
 
-const user = model('user', userSchema);
-module.export = user;
+const User = model('User', userSchema);
+module.export = User;

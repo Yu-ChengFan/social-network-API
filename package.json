@@ -10,7 +10,16 @@
   "version": "1.0.0",
   "main": "server.js",
   "keywords": [],
-  "author": "",
+  "author": "Kevin",
   "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yu-ChengFan/social-network-API.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Yu-ChengFan/social-network-API/issues"
+  },
+  "homepage": "https://github.com/Yu-ChengFan/social-network-API#readme",
   "description": ""
 }

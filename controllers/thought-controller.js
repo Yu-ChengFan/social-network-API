@@ -1,8 +1,8 @@
-const { user, thought } = require('../models');
+const { User, Thought } = require('../models');
 
 const thoughtController = {
     getAllThougths(req, res) {
-        thought.find({})
+        Thought.find({})
         .then(dbthought => res.json(dbthought))
         .catch(err => {
             res.status(400).json(err)
@@ -10,7 +10,7 @@ const thoughtController = {
     },
 
     getThoughtById({ params }, res) {
-        thought.findOne({_id: params.id})
+        Thought.findOne({_id: params.id})
         .then(dbthought=> {
             if(!dbthought){
                 res.status(404).json({ message: 'No thought found with ID.' })
@@ -22,7 +22,7 @@ const thoughtController = {
     },
 
     createThought({ body }, res) {
-        thought.create(body)
+        Thought.create(body)
         .then(({_id}) => {
             return user.findOneAndUpdate({ _id: body.userId }, { $push: { thoughts: _id }}, { new: true });
         })
@@ -31,7 +31,7 @@ const thoughtController = {
     },
 
     updateThought({ params, body }, res) {
-        thought.findOneAndUpdate({_id: params.id }, body, { new: true })
+        Thought.findOneAndUpdate({_id: params.id }, body, { new: true })
         .then(data => {
             if(!data){
                 res.status(404).json({message: 'No thought found with ID.'})
@@ -43,7 +43,7 @@ const thoughtController = {
     },
 
     deleteThought({ params }, res) {
-        thought.findOneAndDelete({ _id: params.id })
+        Thought.findOneAndDelete({ _id: params.id })
         .then((data) => {
             if(!data) {
                 res.status(404).json({message: 'No thought found with ID.'})
@@ -57,7 +57,7 @@ const thoughtController = {
     },
 
     createReaction({ params, body }, res) {
-        thought.findOneAndUpdate({_id: params.id }, { $push: { reactions: body }}, { new: true })
+        Thought.findOneAndUpdate({_id: params.id }, { $push: { reactions: body }}, { new: true })
         .then(data => {
             if(!data){
                 res.status(404).json({ message: 'No thought found with ID.'});
@@ -69,7 +69,7 @@ const thoughtController = {
     },
 
     deleteReaction({ params }, res) {
-        thought.findOneAndUpdate({ _id: params.id }, { $push: {reactions: {reactionId: params.rid}} }, {new: true})
+        Thought.findOneAndUpdate({ _id: params.id }, { $push: {reactions: {reactionId: params.reactionId}} }, {new: true})
         .then(data => {
             if (!data) {
                 res.status(404).json({ message: 'No thought found with that ID!' });
